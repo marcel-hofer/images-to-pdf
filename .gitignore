@@ -1,0 +1,7 @@
+# IDE stuff
+.vs
+bin
+obj
+
+# Build artifacts
+build

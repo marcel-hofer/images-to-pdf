@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push:
+  pull_request:
+    branches: [ ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Build with dotnet
+      run: sh ./tools/build.sh
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: images-to-pdf
+        path: ./build

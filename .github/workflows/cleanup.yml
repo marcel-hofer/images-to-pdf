@@ -1,0 +1,31 @@
+name: Cleanup artifacts
+
+on:
+  workflow_dispatch:
+    inputs:
+      minArtifactsToKeep:
+        description: 'Number of artifacts to always keep'
+        default: '10'
+        required: true
+      minArtifactsDaysToKeep:
+        description: 'Number of days artifacts will be always kept'
+        default: '30'
+        required: true
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Cleanup old artifacts
+      run: sh ./tools/clean-artifacts.sh
+      env:
+        auth: 'token ${{ github.token }}'
+
+        repository: ${{ github.repository }}
+
+        minArtifactsToKeep: ${{ github.event.inputs.minArtifactsToKeep }}
+        minArtifactsDaysToKeep: ${{ github.event.inputs.minArtifactsDaysToKeep }}
