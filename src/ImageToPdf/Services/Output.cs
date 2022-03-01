@@ -105,7 +105,7 @@
             this.DivisionLine(color: Color.TextMuted);
         }
 
-        private static int FullWidth() => Console.WindowWidth;
+        private static int FullWidth() => Console.WindowWidth - 1;
 
         private static int GetEmptySpace(string message)
         {
