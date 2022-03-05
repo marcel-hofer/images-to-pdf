@@ -1,23 +1,23 @@
-﻿using ImageToPdf.Services;
+﻿using ImagesToPdf.Services;
 
 Output.Instance
     .DivisionLine()
-    .Center("ImageToPdf")
+    .Center("ImagesToPdf")
     .DivisionLine()
     .Center("magically merges multiple images into a single PDF file", Color.TextPrimary)
     .Write("  Version: ", Color.TextMuted).WriteLine(VersionInfoResolver.Version, Color.TextPrimary)
     .Write("  Informational version: ", Color.TextMuted).WriteLine(VersionInfoResolver.InformationalVersion, Color.TextPrimary)
     .DivisionLine()
     .Center("Usage", Color.TextPrimary)
-    .Write("  simply drag & drop files over ").Write("ImageToPdf.exe ", Color.TextInfo).WriteLine("or use the command line")
+    .Write("  simply drag & drop files over ").Write("ImagesToPdf.exe ", Color.TextInfo).WriteLine("or use the command line")
     .WriteLine()
-    .Write("  ImageToPdf.exe ").WriteLine("[...files or directories] [--out:output]", Color.TextMuted)
+    .Write("  ImagesToPdf.exe ").WriteLine("[...files or directories] [--out:output]", Color.TextMuted)
     .WriteLine()
     .WriteLine("  Arguments:")
     .Write("  --out:path ", Color.TextInfo).WriteLine("Path to the output file or directory")
     .WriteLine()
     .WriteLine("  Examples:")
-    .Write("  ImageToPdf.exe ").WriteLine("image-1.jpeg image-2.jpeg path/to/dir --out:output.pdf", Color.TextMuted)
+    .Write("  ImagesToPdf.exe ").WriteLine("image-1.jpeg image-2.jpeg path/to/dir --out:output.pdf", Color.TextMuted)
     .DivisionLine();
 
 try

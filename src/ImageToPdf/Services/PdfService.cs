@@ -1,11 +1,11 @@
-﻿using iText.IO.Image;
-using iText.Kernel.Geom;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
-
-namespace ImageToPdf.Services
+﻿namespace ImagesToPdf.Services
 {
+    using iText.IO.Image;
+    using iText.Kernel.Geom;
+    using iText.Kernel.Pdf;
+    using iText.Layout;
+    using iText.Layout.Element;
+
     public class PdfService
     {
         private string[]? images;
