@@ -23,7 +23,7 @@
 
         private static FileVersionInfo? GetFileVersionInfo()
         {
-            var location = Process.GetCurrentProcess().MainModule?.FileName;
+            var location = Environment.ProcessPath;
             if (location == null)
             {
                 return null;
