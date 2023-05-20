@@ -1,4 +1,4 @@
-﻿using ImagesToPdf.Services;
+using ImagesToPdf.Services;
 
 Output.Instance
     .DivisionLine()
@@ -15,6 +15,8 @@ Output.Instance
     .WriteLine()
     .WriteLine("  Arguments:")
     .Write("  --out:path ", Color.TextInfo).WriteLine("Path to the output file or directory")
+    .Write("  --layout:name ", Color.TextInfo).WriteLine("The page layout for the PDF viewer")
+    .WriteLayoutOptions()
     .WriteLine()
     .WriteLine("  Examples:")
     .Write("  ImagesToPdf.exe ").WriteLine("image-1.jpeg image-2.jpeg path/to/dir --out:output.pdf", Color.TextMuted)
@@ -33,9 +35,11 @@ try
     }
 
     var outputFile = FileFinder.GetOutputFile(args, images);
+    var layout = Layout.GetLayout(args);
 
     await PdfService.Create()
         .WithImages(images)
+        .WithLayout(layout)
         .OutputTo(outputFile)
         .ProcessAsync();
 }

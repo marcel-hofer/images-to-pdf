@@ -9,6 +9,7 @@
     public class PdfService
     {
         private string[]? images;
+        private PdfName? layout;
         private string? outputFile;
 
         public static PdfService Create()
@@ -19,6 +20,13 @@
         public PdfService WithImages(params string[] images)
         {
             this.images = images;
+
+            return this;
+        }
+
+        public PdfService WithLayout(PdfName? layout)
+        {
+            this.layout = layout;
 
             return this;
         }
@@ -36,7 +44,7 @@
 
             this.ValidateArguments();
 
-            Output.Instance.WriteLine($"Outputting to {this.outputFile}", Color.TextMuted);
+            Output.Instance.Write("Outputting to ", Color.TextInfo).WriteLine(this.outputFile, Color.TextMuted);
 
             await using var pdfWriter = new PdfWriter(this.outputFile!);
             using var pdfDocument = new PdfDocument(pdfWriter);
@@ -53,6 +61,12 @@
 
                 pdfDocument.AddNewPage(new PageSize(image.GetImageWidth(), image.GetImageHeight()));
                 document.Add(image);
+            }
+
+            if (this.layout != null)
+            {
+                Output.Instance.Write("Set page layout to ", Color.TextInfo).WriteLine(this.layout.GetValue(), Color.TextMuted);
+                pdfDocument.GetCatalog().SetPageLayout(this.layout);
             }
 
             document.Close();

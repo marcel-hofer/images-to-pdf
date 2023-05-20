@@ -15,7 +15,7 @@
             return this;
         }
 
-        public Output WriteLine(string message = "", Color color = Color.TextDefault)
+        public Output WriteLine(string? message = "", Color color = Color.TextDefault)
         {
             SetColor(color);
 
@@ -107,12 +107,14 @@
 
         private static int FullWidth() => Console.WindowWidth - 1;
 
-        private static int GetEmptySpace(string message)
+        private static int GetEmptySpace(string? message)
         {
+            message ??= string.Empty;
+
             int size = FullWidth();
             if (size != Console.CursorLeft + 1)
             {
-                size = size - Console.CursorLeft;
+                size -= Console.CursorLeft;
             }
 
             if (size < message.Length)
