@@ -11,7 +11,7 @@ Output.Instance
     .Center("Usage", Color.TextPrimary)
     .Write("  simply drag & drop files over ").Write("ImagesToPdf.exe ", Color.TextInfo).WriteLine("or use the command line")
     .WriteLine()
-    .Write("  ImagesToPdf.exe ").WriteLine("[...files or directories] [--out:output]", Color.TextMuted)
+    .Write("  ImagesToPdf.exe ").WriteLine("[...files or directories] [--out:output] [--layout:name]", Color.TextMuted)
     .WriteLine()
     .WriteLine("  Arguments:")
     .Write("  --out:path ", Color.TextInfo).WriteLine("Path to the output file or directory")
@@ -19,7 +19,14 @@ Output.Instance
     .WriteLayoutOptions()
     .WriteLine()
     .WriteLine("  Examples:")
-    .Write("  ImagesToPdf.exe ").WriteLine("image-1.jpeg image-2.jpeg path/to/dir --out:output.pdf", Color.TextMuted)
+    .Write("  ImagesToPdf.exe ").WriteLine("image-1.jpeg image-2.jpeg path/to/dir --out:output.pdf --layout:TwoPageLeft", Color.TextMuted)
+    .DivisionLine()
+    .Center("Change layout of existing PDF files")
+    .WriteLine("You can also pass one or more PDF files to adjust their layout. ")
+    .WriteLine("Warning: The input files are being overwritten!", Color.TextDanger)
+    .WriteLine()
+    .WriteLine("  Examples:")
+    .Write("  ImagesToPdf.exe ").WriteLine("document-1.pdf document-2.pdf path/to/dir --layout:TwoPageLeft", Color.TextMuted)
     .DivisionLine();
 
 try
@@ -38,7 +45,7 @@ try
     var layout = Layout.GetLayout(args);
 
     await PdfService.Create()
-        .WithImages(images)
+        .WithInputFiles(images)
         .WithLayout(layout)
         .OutputTo(outputFile)
         .ProcessAsync();
