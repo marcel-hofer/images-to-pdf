@@ -1,4 +1,4 @@
-﻿namespace ImagesToPdf.Services
+﻿namespace Shared.Services
 {
     using iText.Kernel.Pdf;
 
@@ -15,7 +15,7 @@
             new LayoutOption("TwoColumnRight", "Two-Up Continuous (Cover Page)"),
         };
 
-        public static PdfName? GetLayout(string[] args)
+        public static PdfName? GetLayoutOrDefault(string[] args)
         {
             // Find specific layout
             var layout = args.FirstOrDefault(e => e.StartsWith("--layout:"));
@@ -96,7 +96,7 @@
                     return null;
                 }
 
-                return PdfName.staticNames[Key];
+                return PdfName.staticNames[this.Key];
             }
         }
     }

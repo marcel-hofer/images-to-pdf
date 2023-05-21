@@ -1,4 +1,4 @@
-﻿namespace ImagesToPdf.Services
+﻿namespace Shared.Services
 {
     using System.Diagnostics;
 

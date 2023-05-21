@@ -27,5 +27,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: images-to-pdf
-        path: ./build
+        name: binaries
+        path: ./build/**/*.exe
